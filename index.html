@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boulangerie Douceur</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Boulangerie Douceur</h1>
+        <p>Le goût de la tradition</p>
+    </header>
+
+    <section class="menu">
+        <button onclick="showCategory('boulangerie')">Boulangerie</button>
+        <button onclick="showCategory('patisserie')">Pâtisserie</button>
+        <button onclick="showCategory('boisson')">Boissons</button>
+    </section>
+
+    <section id="content" class="content"></section>
+
+    <div id="message" class="message"></div>
+
+    <script>
+        function showCategory(category) {
+            const content = document.getElementById("content");
+
+            let items = {
+                boulangerie: [
+                    { name: "Baguette", img: "https://source.unsplash.com/300x200/?bread" },
+                    { name: "Pain complet", img: "https://source.unsplash.com/300x200/?whole-bread" },
+                    { name: "Croissant", img: "https://source.unsplash.com/300x200/?croissant" }
+                ],
+                patisserie: [
+                    { name: "Éclair chocolat", img: "https://source.unsplash.com/300x200/?eclair" },
+                    { name: "Tarte aux fraises", img: "https://source.unsplash.com/300x200/?strawberry-tart" },
+                    { name: "Pain au chocolat", img: "https://source.unsplash.com/300x200/?pain-au-chocolat" }
+                ],
+                boisson: [
+                    { name: "Café", img: "https://source.unsplash.com/300x200/?coffee" },
+                    { name: "Thé", img: "https://source.unsplash.com/300x200/?tea" },
+                    { name: "Jus d'orange", img: "https://source.unsplash.com/300x200/?orange-juice" }
+                ]
+            };
+
+            content.innerHTML = "";
+
+            items[category].forEach(item => {
+                content.innerHTML += `
+                    <div class="card">
+                        <img src="${item.img}" alt="${item.name}">
+                        <h3>${item.name}</h3>
+                        <button onclick="reserve('${item.name}')">Réserver</button>
+                    </div>
+                `;
+            });
+        }
+
+        function reserve(product) {
+            const message = document.getElementById("message");
+            message.innerText = product + " réservé !";
+            message.style.display = "block";
+
+            setTimeout(() => {
+                message.style.display = "none";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
